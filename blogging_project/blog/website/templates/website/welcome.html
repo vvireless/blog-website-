@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+</head>
+<body>
+    <div class="welcome-message">
+        Welcome! :)
+    </div>
+    {% if user.is_authenticated %}
+        <button class="redirect-button" onclick="location.href='/create-post'">Create Post</button>
+        <form method="post" action="logout/">
+            {% csrf_token %}
+            <button type="submit">Logout</button>
+        </form>
+    {% else %}
+        <button class="redirect-button" onclick="location.href='/login'">Login</button>
+        <button class="redirect-button" onclick="location.href='/sign-up'">Sign Up</button>
+    {% endif %}
+</body>
+</html>

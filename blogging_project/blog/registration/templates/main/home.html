@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog Posts</title>
+    <!-- Add any necessary CSS or other meta tags here -->
+</head>
+<body>
+    <h1>Welcome to Our Blog!</h1>
+    <p>Here are the blog posts:</p>
+    <ul>
+        {% for post in posts %}
+            <li>
+                <strong>Author:</strong> {{ post.0 }}<br>
+                <h2>{{ post.1 }}</h2>
+                <p>{{ post.2 }}</p>
+                <span class="text-muted">Created at: {{ post.3 }}</span>
+            </li>
+        {% empty %}
+            <li>No posts yet :(</li>
+        {% endfor %}
+    </ul>
+    {% if user.is_authenticated %}
+        <form method="post" action="/create-post">
+            {% csrf_token %}
+            <button type="submit">Create Post</button>
+        </form>
+        <form method="post" action="logout/">
+            {% csrf_token %}
+            <button type="submit">Logout</button>
+        </form>
+    {% else %}
+        <button onclick="location.href='/login'">Login</button>
+        <button onclick="location.href='/sign-up'">Sign Up</button>
+    {% endif %}
+</body>
+</html>
